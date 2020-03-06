@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Ekraf</title>
+
+ 
+  <!-- Page level plugin CSS-->
+  <link href="{{ URL::to('/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{{ URL::to('/css/sb-admin.css') }}" rel="stylesheet">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <style type="text/css">
+      body{
+    margin-top:20px;
+}
+/* User Cards */
+.user-box {
+    width: 110px;
+    margin: auto;
+    margin-bottom: 20px;
+    
+}
+
+.user-box img {
+    width: 100%;
+    border-radius: 50%;
+  padding: 3px;
+  background: #fff;
+  -webkit-box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+    -ms-box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card-2 .card {
+  position:relative;
+}
+
+.profile-card-2 .card .card-body {
+  z-index:1;
+}
+
+.profile-card-2 .card::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+  -top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    height: 112px;
+    background-color: #e6e6e6;
+}
+
+
+.profile-card-2 .user-box {
+  margin-top: 30px;
+}
+
+.profile-card-3 .user-fullimage {
+  position:relative;
+}
+
+.profile-card-3 .user-fullimage .details{
+  position: absolute;
+    bottom: 0;
+    left: 0px;
+  width:100%;
+}
+
+.profile-card-4 .user-box {
+    width: 110px;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+.profile-card-4 .list-icon {
+    display: table-cell;
+    font-size: 30px;
+    padding-right: 20px;
+    vertical-align: middle;
+    color: #223035;
+}
+
+.profile-card-4 .list-details {
+  display: table-cell;
+  vertical-align: middle;
+  font-weight: 600;
+    color: #223035;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.profile-card-4 .list-details small{
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 400;
+    color: #808080;
+}
+
+/*Nav Tabs & Pills */
+.nav-tabs .nav-link {
+    color: #223035;
+  font-size: 12px;
+    text-align: center;
+  letter-spacing: 1px;
+    font-weight: 600;
+  margin: 2px;
+    margin-bottom: 0;
+  padding: 12px 20px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+  
+}
+.nav-tabs .nav-link:hover{
+    border: 1px solid transparent;
+}
+.nav-tabs .nav-link i {
+    margin-right: 2px;
+  font-weight: 600;
+}
+
+.top-icon.nav-tabs .nav-link i{
+  margin: 0px;
+  font-weight: 500;
+  display: block;
+    font-size: 20px;
+    padding: 5px 0;
+}
+
+.nav-tabs-primary.nav-tabs{
+  border-bottom: 1px solid #008cff;
+}
+
+.nav-tabs-primary .nav-link.active, .nav-tabs-primary .nav-item.show>.nav-link {
+    color: #008cff;
+    background-color: #fff;
+    border-color: #008cff #008cff #fff;
+    border-top: 3px solid #008cff;
+}
+
+.nav-tabs-success.nav-tabs{
+  border-bottom: 1px solid #15ca20;
+}
+
+.nav-tabs-success .nav-link.active, .nav-tabs-success .nav-item.show>.nav-link {
+    color: #15ca20;
+    background-color: #fff;
+    border-color: #15ca20 #15ca20 #fff;
+    border-top: 3px solid #15ca20;
+}
+
+.nav-tabs-info.nav-tabs{
+  border-bottom: 1px solid #0dceec;
+}
+
+.nav-tabs-info .nav-link.active, .nav-tabs-info .nav-item.show>.nav-link {
+    color: #0dceec;
+    background-color: #fff;
+    border-color: #0dceec #0dceec #fff;
+    border-top: 3px solid #0dceec;
+}
+
+.nav-tabs-danger.nav-tabs{
+  border-bottom: 1px solid #fd3550;
+}
+
+.nav-tabs-danger .nav-link.active, .nav-tabs-danger .nav-item.show>.nav-link {
+    color: #fd3550;
+    background-color: #fff;
+    border-color: #fd3550 #fd3550 #fff;
+    border-top: 3px solid #fd3550;
+}
+
+.nav-tabs-warning.nav-tabs{
+  border-bottom: 1px solid #ff9700;
+}
+
+.nav-tabs-warning .nav-link.active, .nav-tabs-warning .nav-item.show>.nav-link {
+    color: #ff9700;
+    background-color: #fff;
+    border-color: #ff9700 #ff9700 #fff;
+    border-top: 3px solid #ff9700;
+}
+
+.nav-tabs-dark.nav-tabs{
+  border-bottom: 1px solid #223035;
+}
+
+.nav-tabs-dark .nav-link.active, .nav-tabs-dark .nav-item.show>.nav-link {
+    color: #223035;
+    background-color: #fff;
+    border-color: #223035 #223035 #fff;
+    border-top: 3px solid #223035;
+}
+
+.nav-tabs-secondary.nav-tabs{
+  border-bottom: 1px solid #75808a;
+}
+.nav-tabs-secondary .nav-link.active, .nav-tabs-secondary .nav-item.show>.nav-link {
+    color: #75808a;
+    background-color: #fff;
+    border-color: #75808a #75808a #fff;
+    border-top: 3px solid #75808a;
+}
+
+.tabs-vertical .nav-tabs .nav-link {
+    color: #223035;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin: 2px;
+    margin-right: -1px;
+    padding: 12px 1px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    border-radius: 0;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+
+.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #dee2e6;
+}
+
+.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    border-bottom: 1px solid #dee2e6;
+    border-right: 0;
+    border-left: 1px solid #dee2e6;
+}
+
+.tabs-vertical-primary.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #008cff;
+}
+
+.tabs-vertical-primary.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical-primary.tabs-vertical .nav-tabs .nav-link.active {
+    color: #008cff;
+    background-color: #fff;
+    border-color: #008cff #008cff #fff;
+    border-bottom: 1px solid #008cff;
+    border-right: 0;
+    border-left: 3px solid #008cff;
+}
+
+.tabs-vertical-success.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #15ca20;
+}
+
+.tabs-vertical-success.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical-success.tabs-vertical .nav-tabs .nav-link.active {
+    color: #15ca20;
+    background-color: #fff;
+    border-color: #15ca20 #15ca20 #fff;
+    border-bottom: 1px solid #15ca20;
+    border-right: 0;
+    border-left: 3px solid #15ca20;
+}
+
+.tabs-vertical-info.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #0dceec;
+}
+
+.tabs-vertical-info.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical-info.tabs-vertical .nav-tabs .nav-link.active {
+    color: #0dceec;
+    background-color: #fff;
+    border-color: #0dceec #0dceec #fff;
+    border-bottom: 1px solid #0dceec;
+    border-right: 0;
+    border-left: 3px solid #0dceec;
+}
+
+.tabs-vertical-danger.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #fd3550;
+}
+
+.tabs-vertical-danger.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical-danger.tabs-vertical .nav-tabs .nav-link.active {
+    color: #fd3550;
+    background-color: #fff;
+    border-color: #fd3550 #fd3550 #fff;
+    border-bottom: 1px solid #fd3550;
+    border-right: 0;
+    border-left: 3px solid #fd3550;
+}
+
+.tabs-vertical-warning.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #ff9700;
+}
+
+.tabs-vertical-warning.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical-warning.tabs-vertical .nav-tabs .nav-link.active {
+    color: #ff9700;
+    background-color: #fff;
+    border-color: #ff9700 #ff9700 #fff;
+    border-bottom: 1px solid #ff9700;
+    border-right: 0;
+    border-left: 3px solid #ff9700;
+}
+
+.tabs-vertical-dark.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #223035;
+}
+
+.tabs-vertical-dark.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical-dark.tabs-vertical .nav-tabs .nav-link.active {
+    color: #223035;
+    background-color: #fff;
+    border-color: #223035 #223035 #fff;
+    border-bottom: 1px solid #223035;
+    border-right: 0;
+    border-left: 3px solid #223035;
+}
+
+.tabs-vertical-secondary.tabs-vertical .nav-tabs{
+  border:0;
+  border-right: 1px solid #75808a;
+}
+
+.tabs-vertical-secondary.tabs-vertical .nav-tabs .nav-item.show .nav-link, .tabs-vertical-secondary.tabs-vertical .nav-tabs .nav-link.active {
+    color: #75808a;
+    background-color: #fff;
+    border-color: #75808a #75808a #fff;
+    border-bottom: 1px solid #75808a;
+    border-right: 0;
+    border-left: 3px solid #75808a;
+}
+
+.nav-pills .nav-link {
+    border-radius: .25rem;
+    color: #223035;
+    font-size: 12px;
+    text-align: center;
+  letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+  margin: 3px;
+    padding: 12px 20px;
+  -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; 
+
+}
+
+.nav-pills .nav-link:hover {
+    background-color:#f4f5fa;
+}
+
+.nav-pills .nav-link i{
+  margin-right:2px;
+  font-weight: 600;
+}
+
+.top-icon.nav-pills .nav-link i{
+  margin: 0px;
+  font-weight: 500;
+  display: block;
+    font-size: 20px;
+    padding: 5px 0;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #008cff;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(0, 140, 255, 0.5);
+}
+
+.nav-pills-success .nav-link.active, .nav-pills-success .show>.nav-link {
+    color: #fff;
+    background-color: #15ca20;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(21, 202, 32, .5);
+}
+
+.nav-pills-info .nav-link.active, .nav-pills-info .show>.nav-link {
+    color: #fff;
+    background-color: #0dceec;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(13, 206, 236, 0.5);
+}
+
+.nav-pills-danger .nav-link.active, .nav-pills-danger .show>.nav-link{
+    color: #fff;
+    background-color: #fd3550;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(253, 53, 80, .5);
+}
+
+.nav-pills-warning .nav-link.active, .nav-pills-warning .show>.nav-link {
+    color: #fff;
+    background-color: #ff9700;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(255, 151, 0, .5);
+}
+
+.nav-pills-dark .nav-link.active, .nav-pills-dark .show>.nav-link {
+    color: #fff;
+    background-color: #223035;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(34, 48, 53, .5);
+}
+
+.nav-pills-secondary .nav-link.active, .nav-pills-secondary .show>.nav-link {
+    color: #fff;
+    background-color: #75808a;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(117, 128, 138, .5);
+}
+.card .tab-content{
+  padding: 1rem 0 0 0;
+}
+
+.z-depth-3 {
+    -webkit-box-shadow: 0 11px 7px 0 rgba(0,0,0,0.19),0 13px 25px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 11px 7px 0 rgba(0,0,0,0.19),0 13px 25px 0 rgba(0,0,0,0.3);
+}
+
+.bg-box {
+    background-color: #000;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="row">
+        <div class="col-lg-4">
+           <div class="profile-card-4 z-depth-3">
+            <div class="card">
+              <div class="card-body text-center bg-box rounded-top">
+               <div class="user-box">
+               
+               @if($umkm->logo)
+                 <img src="{{$umkm->logo}}" alt="user avatar" width="100px" height="100px">
+               @else
+               
+                 <img src="{{ URL::to('/gambar/store.png') }}" alt="user avatar" width="100px" height="100px">
+               @endif
+
+              </div>
+              <h5 class="mb-1 text-white">{{$umkm->umkm_name}}</h5>
+              <h6 class="text-light">{{$umkm->owner}}</h6>
+             </div>
+              <div class="card-body">
+                <ul class="list-group shadow-none">
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-phone-square"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{$umkm->phone}}</span>
+                    <small>Nomor Telepon</small>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{$umkm->address}}</span>
+                    <small>Alamat</small>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-globe"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{$umkm->business_field}}</span>
+                    <small>Bidang</small>
+                  </div>
+                </li>
+                </ul>
+              
+               </div>
+             
+             </div>
+           </div>
+        </div>
+        <div class="col-lg-8">
+           <div class="card z-depth-3">
+            <div class="card-body">
+          
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Produk</li>
+        </ol>
+        
+     
+        <button type="button" class="btn btn-primary"  id="create-new-product" > <i class="fa fa-plus"></i> Tambah
+        </button>
+       
+      
+
+        <!-- DataTables Example -->
+        <div class="card mb-3" style="margin-top: 10px">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Admin
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+                  
+  
+     
+                  <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    
+            
+                <thead>
+                  <tr>
+                  
+                      
+                      <th width="5%">Foto</th>
+                      <th width="10%">Nama</th>
+                      <th width="10%">Harga</th>
+                      <th width="10%">Action</th>
+                  </tr>
+                </thead>
+               
+              </table>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+      </div>
+      </div>
+        
+    </div>
+</div>
+
+
+<div class="modal fade" id="ajax-crud-modal" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="userCrudModal"></h4>
+    </div>
+    <div class="modal-body">
+        <form id="productForm" name="productForm" class="form-horizontal" enctype="multipart/form-data">
+           <input type="hidden" name="umkm_id" id="umkm_id" value="{{$umkm->id}}">
+           <input type="hidden" name="product_id" id="product_id" >
+
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Nama</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama" value="" maxlength="50" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Harga</label>
+                <div class="col-sm-12">
+                    <input type="number" class="form-control" id="price" name="price" placeholder="Masukan Harga" value="" maxlength="12" required="">
+                </div>
+            </div>
+ 
+
+             <div class="form-group" id="foto-content">
+                <label class="col-sm-2 control-label">Foto</label>
+                <div class="col-sm-12">
+                    <input type="file" id="foto" name="photo"  onchange="loadFile(event)" value="" >
+                </div>
+                 <div class="col-sm-12">
+                    <img  id="fotodisplay" >
+                </div>
+            </div>
+            <div class="modal-footer">
+             <button type="submit" class="btn btn-primary" id="btn-save" value="create">Save changes
+             </button>
+             <button type="button" class="btn btn-danger" id="btn-close-form" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+    </div>
+ 
+</div>
+</div>
+</div>
+
+</div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="{{URL::to('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{URL::to('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{{URL::to('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{{URL::to('js/sb-admin.min.js')}}"></script>
+  <script src="//code.jquery.com/jquery.js"></script>
+        <!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+<link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+  $('#create-new-product').click(function () {
+        $('#productForm').trigger("reset");
+        $('#fotodisplay').removeProp('src');
+        $("#fotodisplay").width(0).height(0);
+        $('#btn-save').val("create-product");
+        $('#productForm').trigger("reset");
+        $('#userCrudModal').html("Tambah Produk");
+        $('#ajax-crud-modal').modal('show');
+        $("#btn-save").html('Tambah');
+        $('#fotodisplay').attr('src',"{{ URL::to('/gambar/store.png') }}");
+        $('#fotodisplay').width(100).height(100);
+        $("#fotodisplay").css('margin', 5 + 'px');         
+    });
+
+  if ($("#productForm").length > 0) {
+      $("#productForm").validate({
+       submitHandler: function(form) {
+      var actionType = $('#btn-save').val();
+      var actionURL ="{{ URL::to('/product/edit') }}";
+      var msg ="Data Berhasil Diubah";
+        var msgError ="Data Gagal Diubah";
+         if(actionType=="create-product"){
+         actionURL="{{ URL::to('/product/create') }}";
+         msg="Data Berhasil Diinput";
+         msgError ="Data Gagal Dinput";
+           console.log(form);
+         }
+      $('#btn-save').html('Sending..');
+     
+
+      $.ajax({
+          data: new FormData($("#productForm")[0]),
+          url: actionURL ,
+          type: "POST",
+          headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+          dataType: 'json',
+           async: false,
+          cache: false,
+          contentType: false,
+          enctype: 'multipart/form-data',
+           processData: false,
+          success: function (data) {
+              $('#btn-save').html('Simpan');
+              var oTable = $('#myTable').dataTable();
+              oTable.fnDraw(false);
+              swal("Berhasil!",msg, "success");
+              $('#ajax-crud-modal').trigger('click');
+          },
+          error: function (data) {
+              console.log(data);
+              swal("Gagal!", msgError, "error");
+              $('#btn-save').html('Simpan');
+              $('#ajax-crud-modal').trigger('click');
+
+          }
+      });
+      }
+    })
+  }
+
+  
+
+  var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('fotodisplay');
+      output.src = reader.result;
+        $("#fotodisplay").width(100).height(100);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+
+  $('#myTable').DataTable({
+        processing: true,
+        serverSide: true,
+          ajax: {
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                url: "{{ URL::to('/product/show') }}/"+$("#umkm_id").val(),
+                type: 'GET',
+            },
+        columns: [
+           
+            {data: 'photo', name: 'photo', orderable: false,
+              render: function( data, type, full, meta ) {
+                       if(data==null){
+                        data= "{{ URL::to('/gambar/default.jpg') }}"
+                       }
+                        return "<center><img src='" + data + "' height='100' width='100'  /></center>";
+                    }
+
+           },
+           { data: 'name', name: 'name' },
+           { data: 'price', name: 'price' },
+           { data: 'action', name: 'action' ,orderable:false},
+        ] });
+
+var deleteProduct = function(id) { swal({
+  title: "Apa Anda Yakin?",
+  text: "Data akan dihapus dan tidak bisa dikembalikan!!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+       $.ajax({
+            url: "{{ URL::to('/product/delete')}}/"+id,
+             type: "delete",
+             dataType: 'json',
+
+             headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+            success: function (data) {
+            var oTable = $('#myTable').dataTable(); 
+            oTable.fnDraw(false);
+              swal("Selesai!", "Data Telah Berhasil Dihapus!", "success");
+            },
+            error: function (data) {
+              console.log(data);
+                  swal("Gagal!", "Gagal Menghapus Data!", "error");
+            }
+        });
+  } 
+});
+}
+
+
+
+   /* When click edit user */
+    $('body').on('click', '.edit-product', function () {
+      var id = $(this).data('id');
+      $('#adminForm').trigger("reset");
+      $.get('{{ URL::to("product/profile") }}/'+id, function (data) {
+          $('#userCrudModal').html("Edit Produk");
+          $('#btn-save').val("edit-product");
+          $('#ajax-crud-modal').show();
+          $('#product_id').val(data.id);
+          $('#name').val(data.name);
+          $("#price").val(data.price);
+          
+          if(data.photo==null){
+             data.photo="{{ URL::to('/gambar/default.jpg') }}"
+          }
+          if(data.address!=null){
+            $("#address").text(data.address);
+          }
+          $("#roles").val(data.role).change();
+          $("#passwordField").hide();
+          $('#fotodisplay').attr('src',data.photo);
+          $('#fotodisplay').width(100).height(100);
+          $("#fotodisplay").css('margin', 5 + 'px');
+          $('#btn-save').html('Simpan');
+      })
+   });
+</script>
+</body>
+</html>
