@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Destinasi Wisata</title>
+  <title>Situs Budaya</title>
 
    <!-- Custom fonts for this template-->
   <link href="{{ URL::to('/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"type="text/css">
@@ -44,12 +44,12 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-           @role("pariwisata")
-        <button type="button" class="btn btn-primary"  id="create-new-destinasi" style="margin: 10px">
+           @role("budaya")
+        <button type="button" class="btn btn-primary"  id="create-new-budaya" style="margin: 10px">
           <i class="fa fa-plus"></i> Tambah
         </button>
        
-       <button type="button" class="btn btn-info"  id="upload" data-toggle="modal" data-target="#destinasiUpload" style="margin: 10px">
+       <button type="button" class="btn btn-info"  id="upload" data-toggle="modal" data-target="#userUpload" style="margin: 10px">
           <i class="fa fa-upload"></i> Upload
         </button>
         @endrole
@@ -58,7 +58,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Data Destinasi</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Data Situs Budaya</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -66,22 +66,26 @@
                   <thead>
                     <tr>
                       <th width="10%">Foto</th>
-                      <th width="20%">Nama</th>
-                      <th width="10%">Kategori</th>
-                      <th width="25%">Alamat</th>
-                      @role("pariwisata")
-                      <th width="10%">Action</th>
+                      <th width="10%">Nama</th>
+                      <th width="15%">Kategori</th>
+                      <th width="10%">Keberadaan</th>
+                      <th width="15%">Alamat</th>
+              
+                      @role("budaya")
+                      <th width="20%">Action</th>
                       @endrole
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th width="10%">Foto</th>
-                      <th width="20%">Nama</th>
-                      <th width="10%">Kategori</th>
-                      <th width="25%">Alamat</th>
-                      @role("pariwisata")
-                      <th width="10%">Action</th>
+                      <th width="10%">Nama</th>
+                      <th width="15%">Kategori</th>
+                      <th width="10%">Keberadaan</th>
+                      <th width="15%">Alamat</th>
+              
+                      @role("budaya")
+                      <th width="20%">Action</th>
                       @endrole
                     </tr>
                   </tfoot>
@@ -118,16 +122,14 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-
-
-<div class="modal fade" id="destinasiUpload" aria-hidden="true">
+<div class="modal fade" id="userUpload" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title" id="Upload Excel">Upload Excel</h4>
     </div>
     <div class="modal-body">
-        <form  id="excelForm" name="excelForm" action="{{ URL::to('/destinasiwisata/upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
+        <form  id="excelForm" name="excelForm" action="{{ URL::to('/budaya/upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
            {{ csrf_field() }}
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">File</label>
@@ -147,6 +149,8 @@
 </div>
 </div>
 
+
+
 <div class="modal fade" id="ajax-crud-modal" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -154,28 +158,78 @@
         <h4 class="modal-title" id="userCrudModal"></h4>
     </div>
     <div class="modal-body">
-        <form id="destinationForm" name="destinationForm" class="form-horizontal" enctype="multipart/form-data">
-           <input type="hidden" name="destination_id" id="destination_id">
+        <form id="budayaForm" name="budayaForm" class="form-horizontal" enctype="multipart/form-data">
+           <input type="hidden" name="budaya_id" id="budaya_id">
+             <div class="form-group">
+                <label for="name" class="col-sm-12 control-label">Tanggal Daftar</label>
+                <div class="col-sm-12">
+                    <input type="date" class="form-control  form-control-user" id="register_date" name="register_date" placeholder="Masukan Tanggal Daftar" value="" maxlength="50" required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-12 control-label">Nomor Daftar</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control  form-control-user" id="register_number" name="register_number" placeholder="Masukan Nomor Daftar" value="" maxlength="50" required="true">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Nama</label>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control  form-control-user" id="name" name="name" placeholder="Masukan Nama " value="" maxlength="50" required="true">
-                </div>
-            </div>
- 
-           <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">Kategori</label>
-                <div class="col-sm-12">
-            <select required class="form-control"  name="kategori" id="kategori">
-                <option value="">Pilih Kategori</option>
-                
-                @foreach($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
-                @endforeach    
-              </select>
+                    <input type="text" class="form-control  form-control-user" id="name" name="name" placeholder="Masukan Nama" value="" maxlength="50" required="true">
                 </div>
             </div>
 
+              <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Keberadaan</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control  form-control-user" id="exist" name="exist" placeholder="Masukan Keberadaan" value="" maxlength="50" required="true">
+                </div>
+            </div>
+           <div class="form-group">
+                <label for="name" class="col-sm-12 control-label">Kategori</label>
+              <div class="col-sm-12">
+                <select required class="form-control"  name="category" id="category">
+                <option value="">Pilih Kategori</option>
+                <option value="Situs">Situs</option>
+                <option value="Struktur">Struktur</option>
+                <option value="Bangunan">Bangunan</option>
+             
+              </select>
+              </div>
+
+        </div>
+
+
+ <div class="form-group">
+                <label for="name" class="col-sm-6 control-label">Provinsi/DI</label>
+                <div class="col-sm-12">
+                  <input type="Text" class="form-control" id="provinsi" name="provinsi" placeholder="Masukan Provinsi" value="" maxlength="50" >
+                </div>
+            </div>
+  <div class="form-group">
+                <label for="name" class="col-sm-6 control-label">Kabupaten/Kota</label>
+                <div class="col-sm-12">
+                  <input type="Text" class="form-control" id="kabupaten" name="kabupaten" placeholder="Masukan Kabupaten" value="" maxlength="50" 
+                </div>
+            </div>
+
+
+       
+          <div class="form-group">
+                <label for="name" class="col-sm-6 control-label">Kecamatan</label>
+                <div class="col-sm-12">
+                  <input type="Text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Masukan Kecamatan" value="" maxlength="50" >
+                </div>
+            </div>
+
+         
+      
+         <div class="form-group">
+                <label for="name" class="col-sm-6 control-label">Desa/Kelurahan</label>
+                <div class="col-sm-12">
+                  <input type="Text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Masukan Kelurahan" value="" maxlength="50" >
+                </div>
+            </div>
 
             <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Alamat</label>
@@ -183,33 +237,15 @@
                     <textarea class="form-control" rows="5" id="address" name="address" required="required" ></textarea>
                 </div>
             </div>
-               <div class="form-group">
-                <label for="name" class="col-sm-12 control-label">Provinsi</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control  form-control-user" id="provinsi" name="provinsi" placeholder="Masukan Provinsi" value="" maxlength="50" required="true">
-                </div>
 
-          <div class="form-group">
-                <label for="name" class="col-sm-12 control-label">Kecamatan</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control  form-control-user" id="kecamatan" name="kecamatan" placeholder="Masukan  Kecamatan " value="" maxlength="50" required="true">
-                </div>
 
-            <div class="form-group">
-                <label for="name" class="col-sm-12 control-label">Desa/Kelurahan</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control  form-control-user" id="kelurahan" name="kelurahan" placeholder="Masukan  Kelurahan " value="" maxlength="50" required="true">
-                </div>
-            </div>
 
-               
-                 
-            </div>
+ 
 
              <div class="form-group" id="foto-content">
                 <label class="col-sm-2 control-label">Foto</label>
                 <div class="col-sm-12">
-                    <input type="file" id="photo" name="photo"  onchange="loadFile(event)" value="" >
+                    <input type="file" id="foto" name="photo"  onchange="loadFile(event)" value="" >
                 </div>
                  <div class="col-sm-12">
                     <img  id="fotodisplay" >
@@ -218,14 +254,15 @@
             <div class="modal-footer">
              <button type="submit" class="btn btn-primary" id="btn-save" value="create">Save changes
              </button>
-             <button type="button" class="btn btn-danger" id="btn-close-form" data-dismiss="modal">Tutup</button>
+             <button type="button" class="btn btn-danger" id="btn-Tutup-form" data-dismiss="modal">Tutup</button>
             </div>
         </form>
-    
- </div>
+    </div>
+ 
 </div>
 </div>
 </div>
+
 
 
 
@@ -250,65 +287,64 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="js/sb-admin-2.min.js"></script>
-@role("pariwisata")
+@role("budaya")
 <script type="text/javascript">
-  
-    $('#myTable').DataTable({
+  $('#myTable').DataTable({
         processing: true,
         serverSide: true,
           ajax: {
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
-                url: '{!! route('show.destination') !!}',
+                url: '{!! route('show.budaya') !!}',
                 type: 'GET',
             },
         columns: [
-             {data: 'photo', name: 'photo', orderable: false,searchable: false,
+        {data: 'photo', name: 'photo', orderable: false,
               render: function( data, type, full, meta ) {
                        if(data==null){
-                        data= "{{ URL::to('/gambar/sunbed.png') }}"
-                        return "<center><img src='" + data + "' height='100' width='100'  /></center>"
+                        data= "{{ URL::to('/gambar/default.jpg') }}";
+                          return "<center><img src='" + data + "' height='100' width='100'  /></center>";
                        }
-                     
-                        return "<center><img src='{{ URL::to('/gambar/pariwisata/destinasi') }}/" + data + "' height='100' width='100'  /></center>";
+
+                       data ="{{ URL::to('/gambar/budaya/situs') }}/"+data;
+                       return "<center><img src='" + data + "' height='100' width='100'  /></center>";
+                      
                     }
 
            },
-           { data: 'destination_name', name: 'destination_name' },
-           { data: 'kategori', name: 'kategori' },
-           { data: 'address', name: 'address' },
+           { data: 'object_name', name: 'object_name' },
+           { data: 'object_category', name: 'object_category' },
+           { data: 'object_exist', name: 'object_exist' },
+           { data: 'object_address', name: 'object_address' },
            {data: 'action', name: 'action', orderable: false},
 
         ]});
-
-
-  $('#create-new-destinasi').click(function () {
-        $('#umkmForm').trigger("reset");
+$('#create-new-budaya').click(function () {
+        $('#budayaForm').trigger("reset");
         $('#fotodisplay').removeProp('src');
         $("#fotodisplay").width(0).height(0);
-        $('#btn-save').val("create-destination");
-        $('#destination_id').val('');
-        $('#destinationForm').trigger("reset");
-        $('#userCrudModal').html("Tambah Pariwisata");
+        $('#btn-save').val("create-budaya");
+        $('#budaya_id').val('');
+        $('#budayaForm').trigger("reset");
+        $('#userCrudModal').html("Tambah budaya");
         $('#ajax-crud-modal').modal('show');
-        $("#btn-save").html('Add');
-        $('#fotodisplay').attr('src',"{{ URL::to('/gambar/store.png') }}");
-        $('#fotodisplay').width(100).height(100);
-        $("#fotodisplay").css('margin', 5 + 'px');            
+        $("#btn-save").html('Tambah');
+        $("#passwordField").show();
+        $("#roles").val("").change();
+        $("#fotodisplay").css('margin', 0 + 'px');
+        $('#fotodisplay').attr('required','required');         
     });
 
-
-
-  if ($("#destinationForm").length > 0) {
-      $("#destinationForm").validate({
+if ($("#budayaForm").length > 0) {
+      $("#budayaForm").validate({
        submitHandler: function(form) {
       var actionType = $('#btn-save').val();
-      var actionURL ="{{ URL::to('/destinasiwisata/edit') }}";
+      var actionURL ="{{ URL::to('/budaya/edit') }}";
       var msg ="Data Berhasil Diubah";
         var msgError ="Data Gagal Diubah";
-         if(actionType=="create-destination"){
-         actionURL="{{ URL::to('/destinasiwisata/create') }}";
+         if(actionType=="create-budaya"){
+         actionURL="{{ URL::to('/budaya/create') }}";
          msg="Data Berhasil Diinput";
          msgError ="Data Gagal Dinput";
          }
@@ -316,7 +352,7 @@
      
 
       $.ajax({
-          data: new FormData($("#destinationForm")[0]),
+          data: new FormData($("#budayaForm")[0]),
           url: actionURL ,
           type: "POST",
           headers: {
@@ -329,7 +365,6 @@
           enctype: 'multipart/form-data',
            processData: false,
           success: function (data) {
-               console.log(data);
               $('#btn-save').html('Simpan');
               var oTable = $('#myTable').dataTable();
               oTable.fnDraw(false);
@@ -340,6 +375,7 @@
               console.log(data);
               swal("Gagal!", msgError, "error");
               $('#btn-save').html('Simpan');
+              $('#ajax-crud-modal').trigger('click');
 
           }
       });
@@ -347,20 +383,7 @@
     })
   }
 
-
-  
-var loadFile = function(event) {
-    var reader = new FileReader();
-    reader.onload = function(){
-      var output = document.getElementById('fotodisplay');
-      output.src = reader.result;
-        $("#fotodisplay").width(100).height(100);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  };
-
- var deleteDestination = function(id) { 
-  swal({
+var deleteBudaya = function(id) { swal({
   title: "Apa Anda Yakin?",
   text: "Data akan dihapus dan tidak bisa dikembalikan!!",
   icon: "warning",
@@ -369,9 +392,8 @@ var loadFile = function(event) {
 })
 .then((willDelete) => {
   if (willDelete) {
-         console.log(id);
        $.ajax({
-            url: "{{ URL::to('/destinasiwisata/delete')}}/"+id,
+            url: "{{ URL::to('/budaya/delete')}}/"+id,
              type: "delete",
              dataType: 'json',
 
@@ -391,41 +413,92 @@ var loadFile = function(event) {
 }
 
 
- /* When click edit destinasi */
-    $('body').on('click', '.edit-destination', function () {
+   /* When click edit user */
+    $('body').on('click', '.edit-budaya', function () {
       var id = $(this).data('id');
-      $('#pameranForm').trigger("reset");
-      $.get('{{ URL::to("/destinasiwisata/profile/") }}/'+id, function (data) {
-          $('#userCrudModal').html("Edit Destinasi Wisata");
-          $('#btn-save').val("edit-pameran");
+      $('#budayaForm').trigger("reset");
+      $.get('{{ URL::to("/budaya/profile/") }}/'+id, function (data) {
+          $('#name-error').hide();
+          $('#email-error').hide();
+          $('#userCrudModal').html("Edit Situs Budaya");
+          $('#btn-save').val("edit-user");
           $('#ajax-crud-modal').show();
-          $('#destination_id').val(data.id);
-          $('#name').val(data.destination_name);
-          $('#mulai').val(data.start_date);
-          $('#kategori').val(data.destination_category_id);
-          $('#deskripsi').val(data.description);
-          $('#address').text(data.address);
+          $('#budaya_id').val(data.id);
+          $('#name').val(data.object_name);
+          $('#category').val(data.object_category);
+          $("#exist").val(data.object_exist);
+          $("#register_date").val(data.register_date);
+          $("#register_number").val(data.register_number);
           $("#provinsi").val(data.provinsi);
           $("#kecamatan").val(data.kecamatan);
           $("#kelurahan").val(data.kelurahan);
-          if(data.poster==null){
-             data.poster="{{ URL::to('/gambar/sunbed.png') }}"
+          $("#kabupaten").val(data.kabupaten);
+          $("#removeProp").val();
+          if(data.photo==null){
+             data.photo="{{ URL::to('/gambar/default.jpg') }}";
           }else{
-            data.poster="{{ URL::to('/gambar/destinasiwisata') }}/"+data.poster;
+            data.photo="{{ URL::to('/gambar/budaya') }}/situs/"+data.photo;
           }
-  
-          $('#fotodisplay').attr('src',data.poster);
+       
+          $("#address").text(data.object_address);
+          $("#roles").val(data.role).change();
+          $("#passwordField").hide();
+          $('#fotodisplay').attr('src',data.photo);
           $('#fotodisplay').width(100).height(100);
           $("#fotodisplay").css('margin', 5 + 'px');
           $('#btn-save').html('Simpan');
-          console.log(data);
       })
    });
-
-  $( ".pariwisata" ).addClass( "active" );
+var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('fotodisplay');
+      output.src = reader.result;
+        $("#fotodisplay").width(100).height(100);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+ 
+  $( ".budaya" ).addClass( "active" );
       </script>
 @else
-      
+<script 
+type="text/javascript">  
+$('#myTable').DataTable({
+        processing: true,
+        serverSide: true,
+          ajax: {
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                url: '{!! route('show.budaya') !!}',
+                type: 'GET',
+            },
+        columns: [
+           
+            {data: 'photo', name: 'photo', orderable: false,
+              render: function( data, type, full, meta ) {
+                       if(data==null){
+                        data= "{{ URL::to('/gambar/default.jpg') }}";
+                          return "<center><img src='" + data + "' height='100' width='100'  /></center>";
+                       }
+
+                       data ="{{ URL::to('/gambar/budaya/situs') }}/"+data;
+                       return "<center><img src='" + data + "' height='100' width='100'  /></center>";
+                      
+                    }
+
+           },
+           { data: 'object_name', name: 'object_name' },
+           { data:  "object_category", name:  "object_category" },
+           { data: "object_exist", name: "object_exist" },
+           { data: 'object_address', name: 'object_address' },
+     
+
+        ]});
+ 
+  $( ".budaya" ).addClass( "active" );
+      </script>        
 @endrole
 
 </body>

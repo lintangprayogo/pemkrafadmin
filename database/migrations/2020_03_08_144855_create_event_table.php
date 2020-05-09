@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExhibitionTable extends Migration
+class CreateEventTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateExhibitionTable extends Migration
      */
     public function up()
     {
-        Schema::create('exhibitions', function (Blueprint $table) {
+       Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("exhibition_name");
+            $table->string("event_name");
             $table->string("description");
             $table->string("start_date");
             $table->string("end_date");
@@ -24,6 +24,8 @@ class CreateExhibitionTable extends Migration
             $table->string("location");
             $table->string("longitude")->nullable();
             $table->string("latitude")->nullable();
+              $table->unsignedBigInteger("event_category_id")->nullable();
+            $table->foreign('event_category_id')->references('id')->on('event_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -35,6 +37,6 @@ class CreateExhibitionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exhibition');
+        Schema::dropIfExists('events');
     }
 }

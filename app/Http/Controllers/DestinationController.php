@@ -9,6 +9,7 @@ use Yajra\Datatables\Datatables;
 use DB;
 use App\Imports\DestinationImport;
 use Excel;
+use Redirect;
 class DestinationController extends Controller
 {
     //
@@ -50,17 +51,16 @@ class DestinationController extends Controller
 
 
       public function show(){
- $left = DB::table('destinations')->select("destinations.id","destination_name","address","kecamatan","kelurahan","provinsi","destination_category.name as kategori","photo")
-            ->leftJoin('destination_category', 'destinations.destination_category_id', '=', 'destination_category.id')->get();
+ $left = DB::table('destinations')->select("destinations.id","destination_name","address","kecamatan","kelurahan","provinsi","destination_categories.name as kategori","photo")
+            ->leftJoin('destination_categories', 'destinations.destination_category_id', '=', 'destination_categories.id')->get();
 
          return  Datatables::of($left)
        ->addColumn('action','
-            <center>
-              <a href="{{ URL::to("/umkm/$id") }}"   data-id="{{ $id }}" data-original-title="Detail" class="detail btn btn-primary detail-umkm" >
-              <i class="fa fa-eye"></i>
-             </a>
-
-           
+             <center>
+            <a href="#"  data-id="{{ $id }}" data-original-title="Edit" class="edit btn btn-success edit-destination"  data-toggle="modal" data-target="#ajax-crud-modal">
+            <i class="fa fa-edit"></i>
+            
+            </a>
            <a href="#" class="btn btn-danger" onclick="deleteDestination({{$id}})"><i class="fa fa-trash"></i></a>
               </center>')
         ->rawColumns(['action'])
@@ -72,10 +72,20 @@ class DestinationController extends Controller
          $destination = Destination::find($id);
          if($destination){
            $destination->delete();
-           return abort(200,"Data Telah Dihapus");
+           return $destination;
           }
           return abort(404,"Destinasi Tidak Ditemukan");
       }
+
+        public function profile($id){
+         $destination = Destination::find($id);
+         if($destination){
+          
+           return $destination;
+          }
+          return abort(404,"Destinasi Tidak Ditemukan");
+      }
+  
   
 
 
@@ -87,6 +97,37 @@ class DestinationController extends Controller
       } catch (Exception $e) {
               return Redirect::back();
       }
+   }
+
+
+   public function edit(Request $request){
+      $destination=Destination::find($request->destination_id);
+      $destination->destination_name=$request->name;
+      $destination->address=$request->address;
+      $destination->destination_category_id=$request->kategori;
+      $destination->provinsi=$request->provinsi;
+      $destination->kecamatan=$request->kecamatan;
+      $destination->kelurahan=$request->kelurahan;
+
+      $oldPoster=$destination->poster; 
+     if(isset($poster)){
+            $ext = $logo->getClientOriginalExtension();
+            $newName = rand(100000,1001238912).".".$ext;
+            $gambar_path = public_path()."/gambar/event";
+            $destination->move($gambar_path, $newName);
+            $destination->poster=$newName;
+            $check = $destination->save();
+            if($check && !empty($oldPoster)){
+              $path = public_path()."/gambar/event/".$oldPoster;
+              if(file_exists($path)){
+                 unlink($path);
+              }
+            }
+          return $destination;
+        }
+
+          $destination->save();         
+        return $destination;
    }
 
 

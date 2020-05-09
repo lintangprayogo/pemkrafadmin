@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ekraf</title>
+  <title>Event {{$kind}}</title>
 
    <!-- Custom fonts for this template-->
   <link href="{{ URL::to('/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"type="text/css">
@@ -44,28 +44,23 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-         @role("ekraf")
         <button type="button" class="btn btn-primary"  id="create-new-pameran" style="margin: 10px">
           <i class="fa fa-plus"></i> Tambah
         </button>
        
-       <button type="button" class="btn btn-info"  id="upload" data-toggle="modal" data-target="#userUpload" style="margin: 10px">
-          <i class="fa fa-upload"></i> Upload
-        </button>
-        @endrole
-
+ 
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Data Pameran</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Data Event {{$kind}}</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                         <th width="5%"><center>Poster</center></th>
+                      <th width="5%"><center>Poster</center></th>
                       <th width="10%"><center>Nama Acara</center></th>
                       <th width="10%"><center>Tanggal Mulai</center></th>
                       <th width="10%"><center>Tangal Berakhir</center></th>
@@ -126,10 +121,11 @@
     <div class="modal-body">
         <form id="pameranForm" name="pameranForm" class="form-horizontal" enctype="multipart/form-data">
            <input type="hidden" name="pameran_id" id="pameran_id">
+           <input type="hidden" name="kind" id="kind" value="{{$kind}}">
             <div class="form-group">
-                <label for="name" class="col-sm-6 control-label">Nama Pameran</label>
+                <label for="name" class="col-sm-6 control-label">Nama Event</label>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control" id="pameran" name="pameran" placeholder="Masukan Nama Pameran" value="" maxlength="50" required="">
+                    <input type="text" class="form-control" id="event" name="event" placeholder="Masukan Nama Pameran" value="" maxlength="50" required="">
                 </div>
             </div>
 
@@ -220,31 +216,31 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="js/sb-admin-2.min.js"></script>
   <script
-   type="text/javascript">$('#myTable').DataTable({
+   type="text/javascript">
+   $('#myTable').DataTable({
         processing: true,
         serverSide: true,
           ajax: {
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
-                url: '{!! route('show.pameran') !!}',
+                url: "{{ URL::to('/event/show')}}/"+$("#kind").val(),
                 type: 'GET',
             },
         columns: [
-           
-            {data: 'poster', name: 'poster', orderable: false,searchable:false
+            {data: 'poster', name: 'poster', orderable: false,searchable:false,
               render: function( data, type, full, meta ) {
                        if(data==null){
-                        data= "{{ URL::to('/gambar/store.png') }}"
+                        data= "{{ URL::to('/gambar/event.png') }}"
                        }
 
                 
                      
-                        return "<center><img src=' {{ URL::to('/gambar/umkm/pameran') }}/" + data + "' height='100' width='100'  /></center>";
+                        return "<center><img src=' {{ URL::to('/gambar/event') }}/" + data + "' height='100' width='100'  /></center>";
                     }
 
            },
-           { data: 'exhibition_name', name: 'exhibition_name' },
+           { data: 'event_name', name: 'event_name' },
            { data: 'start_date', name: 'start_date' },
            { data: 'end_date', name: 'end_date' },
            { data: 'price', name: 'price' },
@@ -253,7 +249,6 @@
         ]});
 
       </script>
-<script type="text/javascript"></script>
 
 
 <script type="text/javascript">
@@ -268,7 +263,7 @@
         $('#ajax-crud-modal').modal('show');
         $("#btn-save").html('Tambah');
         $("#passwordField").show();
-        $('#fotodisplay').attr('src',"{{ URL::to('/gambar/store.png') }}");
+        $('#fotodisplay').attr('src',"{{ URL::to('/gambar/event.png') }}");
         $('#fotodisplay').width(100).height(100);
         $("#fotodisplay").css('margin', 5 + 'px');            
     });
@@ -278,11 +273,11 @@
       $("#pameranForm").validate({
        submitHandler: function(form) {
       var actionType = $('#btn-save').val();
-      var actionURL ="{{ URL::to('/pameran/edit') }}";
+      var actionURL ="{{ URL::to('/event/edit') }}";
       var msg ="Data Berhasil Diubah";
         var msgError ="Data Gagal Diubah";
          if(actionType=="create-pameran"){
-         actionURL="{{ URL::to('/pameran/create') }}";
+         actionURL="{{ URL::to('/event/create') }}";
          msg="Data Berhasil Diinput";
          msgError ="Data Gagal Dinput";
         }
@@ -332,7 +327,7 @@
     .then((willDelete) => {
       if (willDelete) {
            $.ajax({
-                url: "{{ URL::to('/pameran/delete')}}/"+id,
+                url: "{{ URL::to('/event/delete')}}/"+id,
                  type: "delete",
                  dataType: 'json',
 
@@ -357,12 +352,12 @@
     $('body').on('click', '.edit-pameran', function () {
       var id = $(this).data('id');
       $('#pameranForm').trigger("reset");
-      $.get('{{ URL::to("/pameran/profile/") }}/'+id, function (data) {
-          $('#userCrudModal').html("Edit Pameran");
+      $.get('{{ URL::to("/event/profile/") }}/'+id, function (data) {
+          $('#userCrudModal').html("Edit Event");
           $('#btn-save').val("edit-pameran");
           $('#ajax-crud-modal').show();
           $('#pameran_id').val(data.id);
-          $('#pameran').val(data.exhibition_name);
+          $('#event').val(data.event_name);
           $('#mulai').val(data.start_date);
           $('#akhir').val(data.end_date);
           $('#deskripsi').val(data.description);
@@ -372,7 +367,7 @@
              data.poster="{{ URL::to('/gambar/store.png') }}"
           }
   
-          $('#fotodisplay').attr('src',"{{ URL::to('/gambar/umkm/pameran') }}/"+data.poster);
+          $('#fotodisplay').attr('src',"{{ URL::to('/gambar/event') }}/"+data.poster);
           $('#fotodisplay').width(100).height(100);
           $("#fotodisplay").css('margin', 5 + 'px');
           $('#btn-save').html('Simpan');
@@ -390,8 +385,19 @@ var loadFile = function(event) {
 
 
 
- 
-  $( ".ekraf" ).addClass( "active" );
+ if($("#kind").val()=="Budaya"){
+    $( ".budaya" ).addClass( "active" );
+   
+ }
+ else if($("#kind").val()=="Ekraf"){
+    $( ".ekraf" ).addClass( "active" );
+   
+ }
+  else if ($("#kind").val()=="Pariwisata"){
+    $( ".pariwisata" ).addClass( "active" );
+     
+ }
+
 
 
 

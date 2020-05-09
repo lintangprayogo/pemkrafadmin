@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 class DestinationCategory extends Model
 {
     //
-     protected $table="destination_category";
+     protected $table="destination_categories";
 }

@@ -38,17 +38,20 @@ class CreateUmkmTable extends Migration
             $table->string("data_year")->nullable();
             $table->integer("male_employe")->nullable();
             $table->integer("female_employe")->nullable();
-            $table->integer("male_labor")->nullable();
-            $table->integer("female_labor")->nullable();
+            $table->integer("male_labour")->nullable();
+            $table->integer("female_labour")->nullable();
             $table->string("capacity")->nullable();
-            $table->string("turnover")->nullable();
+            $table->integer("omset")->nullable();
             $table->string("asset")->nullable();
             $table->string("logo")->nullable();
-            $table->string("independent_capital")->nullable();
-            $table->string("external_capital")->nullable();
+            $table->integer("independent_capital")->nullable();
+            $table->integer("external_capital")->nullable();
             $table->string("longitude")->nullable();
             $table->string("latitude")->nullable();
             $table->string("data_resource")->nullable();
+            $table->string("regional_market")->nullable();
+            $table->string("national_market")->nullable();
+            $table->string("inter_market")->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,8 @@
   <!-- Page level plugin CSS-->
   <link href="{{ URL::to('/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
 
+   <!-- Custom fonts for this template-->
+  <link href="{{ URL::to('/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"type="text/css">
   <!-- Custom styles for this template-->
   <link href="{{ URL::to('/css/sb-admin.css') }}" rel="stylesheet">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -444,7 +446,7 @@
                <div class="user-box">
                
                @if($umkm->logo)
-                 <img src="{{$umkm->logo}}" alt="user avatar" width="100px" height="100px">
+                 <img src="{{ URL::to('/gambar/umkm') }}/{{$umkm->logo}}" alt="user avatar" width="100px" height="100px">
                @else
                
                  <img src="{{ URL::to('/gambar/store.png') }}" alt="user avatar" width="100px" height="100px">
@@ -467,7 +469,7 @@
                 </li>
                 <li class="list-group-item">
                   <div class="list-icon">
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-map-marker-alt"></i>
                   </div>
                   <div class="list-details">
                     <span>{{$umkm->address}}</span>
@@ -476,7 +478,7 @@
                 </li>
                 <li class="list-group-item">
                   <div class="list-icon">
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-store"></i>
                   </div>
                   <div class="list-details">
                     <span>{{$umkm->business_field}}</span>
@@ -704,10 +706,13 @@
            
             {data: 'photo', name: 'photo', orderable: false,
               render: function( data, type, full, meta ) {
-                       if(data==null){
-                        data= "{{ URL::to('/gambar/default.jpg') }}"
-                       }
-                        return "<center><img src='" + data + "' height='100' width='100'  /></center>";
+                    if(data==null){
+                        data= "{{ URL::to('/gambar/default.jpg') }}";
+                          return "<center><img src='" + data + "' height='100' width='100'  /></center>";
+                      }
+
+                       data ="{{ URL::to('/gambar/umkm/produk') }}/"+data;
+                       return "<center><img src='" + data + "' height='100' width='100'  /></center>";
                     }
 
            },

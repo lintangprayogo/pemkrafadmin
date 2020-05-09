@@ -121,7 +121,32 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-
+ <div class="modal fade" id="userUpload" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="Upload Excel">Upload Excel</h4>
+    </div>
+    <div class="modal-body">
+        <form  id="excelForm" name="excelForm" action="{{ URL::to('/umkm/upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
+           {{ csrf_field() }}
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">File</label>
+                <div class="col-sm-12">
+                    <input type="File" id="file" name="file" placeholder="File"  required="required" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                </div>
+            </div>
+           
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btn-upload" value="create">Upload</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+      </div> 
+    </div>
+    
+</div>
+</div>
 <div class="modal fade" id="ajax-crud-modal" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -201,12 +226,7 @@
                 </div>
             </div>
 
-          <div class="form-group">
-                <label for="name" class="col-sm-6 control-label">Desa/Kelurahan</label>
-                <div class="col-sm-12">
-                  <input type="Text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Masukan Kelurahan" value="" maxlength="50" >
-                </div>
-            </div>
+     
 
 
           <div class="form-group">
@@ -327,14 +347,14 @@
           <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Tenaga Kerja Pria</label>
                 <div class="col-sm-12">
-                    <input type="number" class="form-control" id="male_labor" name="male_labour" placeholder="Masukan Karyawan Pria" value="" maxlength="50">
+                    <input type="number" class="form-control" id="male_labour" name="male_labour" placeholder="Masukan Karyawan Pria" value="" maxlength="50">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Tenaga Kerja Wanita</label>
                 <div class="col-sm-12">
-                    <input type="number" class="form-control" id="female_labor" name="female_labour" placeholder="Masukan Tenaga Kerja Wanita" value="" maxlength="50">
+                    <input type="number" class="form-control" id="female_labour" name="female_labour" placeholder="Masukan Tenaga Kerja Wanita" value="" maxlength="50">
                 </div>
             </div>
 
@@ -342,7 +362,7 @@
           <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Kapasitas</label>
                 <div class="col-sm-12">
-                    <input type="number" class="form-control" id="capacity" name="capacity" placeholder="Masukan Omset" value="" maxlength="50">
+                    <input type="text" class="form-control" id="capacity" name="capacity" placeholder="Masukan Omset" value="" maxlength="50">
                 </div>
             </div>
 
@@ -357,7 +377,7 @@
             <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Modal Sendiri</label>
                 <div class="col-sm-12">
-                    <input type="number" class="form-control" id="independent_capital" name="independent_capital" placeholder="Masukan asset" value="" maxlength="50">
+                    <input type="number" class="form-control" id="independent_capital" name="independent_capital" placeholder="Masukan Modal Sendiri" value="" maxlength="50">
                 </div>
             </div>
 
@@ -365,7 +385,7 @@
              <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Modal Luar</label>
                 <div class="col-sm-12">
-                    <input type="number" class="form-control" id="" name="external_capital" placeholder="Masukan Modal Luar" value="" maxlength="50">
+                    <input type="number" class="form-control" id="external_capital" name="external_capital" placeholder="Masukan Modal Luar" value="" maxlength="50">
                 </div>
             </div>
   
@@ -373,7 +393,7 @@
        <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Sumber Data</label>
                 <div class="col-sm-12">
-                    <input type="name" class="form-control" id="" name="external_capital" placeholder="Masukan Sumber Data" value="" maxlength="50">
+                    <input type="name" class="form-control" id="data_source" name="data_source" placeholder="Masukan Sumber Data" value="" maxlength="50">
                 </div>
             </div>
 
@@ -410,42 +430,19 @@
     </div>
     </div>
 
-    <div class="modal fade" id="userUpload" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title" id="Upload Excel">Upload Excel</h4>
-    </div>
-    <div class="modal-body">
-        <form  id="excelForm" name="excelForm" action="{{ URL::to('/umkm/upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
-           {{ csrf_field() }}
-            <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">File</label>
-                <div class="col-sm-12">
-                    <input type="File" id="file" name="file" placeholder="File"  required="required" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-                </div>
-            </div>
-           
-            <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btn-upload" value="create">Upload</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </form>
-      </div> 
-    </div>
-    
-</div>
-</div>
+   
 
 
       
-    <!-- Bootstrap core JavaScript-->
-
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   
 
   <!-- Core plugin JavaScript-->
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+   <!-- Bootstrap core JavaScript-->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Custom scripts for all pages-->
 
   <script src="//code.jquery.com/jquery.js"></script>
@@ -477,13 +474,13 @@
                        if(data==null){
                         data= "{{ URL::to('/gambar/store.png') }}"
                        }
-                     
+                         data="{{ URL::to('/gambar/umkm') }}/"+data;
                         return "<center><img src='" + data + "' height='100' width='100'  /></center>";
                     }
 
            },
            { data: 'umkm_name', name: 'umkm_name' },
-           { data: 'business_form', name: 'business_form' },
+           { data: 'business_sector', name: 'business_sector' },
            { data: 'phone', name: 'phone' },
            { data: 'address', name: 'address' },
            {data: 'action', name: 'action', orderable: false},
@@ -596,6 +593,7 @@
       var id = $(this).data('id');
       $('#umkmForm').trigger("reset");
       $.get('{{ URL::to("/umkm/profile/") }}/'+id, function (data) {
+          console.log(data);
           $('#userCrudModal').html("Edit UMKM");
           $('#btn-save').val("edit-umkm");
           $('#ajax-crud-modal').show();
@@ -604,6 +602,7 @@
           $('#address').val(data.address);
           $("#phone").val(data.phone);
           $("#website").val(data.website);
+          $("#email").val(data.email);
           $("#fax").val(data.fax);
           $("#owner").val(data.owner);
           $("#business_form").val(data.business_form);
@@ -619,13 +618,19 @@
           $("#data_year").val(data.data_year);
           if(data.logo==null){
              data.logo="{{ URL::to('/gambar/store.png') }}"
-          }
+          }            
+          $("#permission_number").val(data.umkm_permission_number);
+          $("#permission_name").val(data.umkm_permission_name);
           $("#capacity").val(data.capacity);
-          $("#turnover").val(data.turnover);
+          $("#male_employe").val(data.male_employe);
+          $("#female_employe").val(data.female_employe);
+          $("#male_labour").val(data.male_labour);
+          $("#female_labour").val(data.female_labour);
+          $("#turnover").val(data.omset);
           $("#external_capital").val(data.external_capital);
           $("#independent_capital").val(data.independent_capital);
           $("#data_source").val(data.data_resource);
-          $("#turnover").val(data.turnover);
+          $("#turnover").val(data.omset);
           $("#independent_capital").val(data.independent_capital);
           $("#external_capital").val(data.external_capital);
           $('#fotodisplay').attr('src',data.logo);
@@ -649,20 +654,7 @@ var loadFile = function(event) {
   $( ".nav-item" ).removeClass( "active" );
   $( ".ekraf" ).addClass( "active" );
 
-  $(function() {
-            $('.date_year').datepicker({
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'yy',
-                onClose: function(dateText, inst) { 
-                    var year = $("#ui-data_year-div .ui-data_year-year :selected").val();
-                    $(this).datepicker('setDate', new Date(year, 1));
-                }
-            });
-        $(".date-picker-year").focus(function () {
-                $(".ui-datepicker-month").hide();
-            });
-        });
+
 
 
 </script>

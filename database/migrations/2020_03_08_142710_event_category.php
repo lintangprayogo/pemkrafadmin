@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableDestinationCategory extends Migration
+class EventCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTableDestinationCategory extends Migration
      */
     public function up()
     {
-        Schema::create('destination_categories', function (Blueprint $table) {
+          Schema::create('event_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("name");
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTableDestinationCategory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('destination_categories');
+        //
     }
 }

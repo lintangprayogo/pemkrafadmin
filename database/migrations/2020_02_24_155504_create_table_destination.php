@@ -29,7 +29,7 @@ class CreateTableDestination extends Migration
             $table->string("fax")->nullable();
             $table->string("website")->nullable();
             $table->unsignedBigInteger("destination_category_id")->nullable();
-            $table->foreign('destination_category_id')->references('id')->on('destination_category')->onDelete('cascade');
+            $table->foreign('destination_category_id')->references('id')->on('destination_categories')->onDelete('cascade');
                $table->string("longitude")->nullable();
             $table->string("latitude")->nullable();
             $table->string("photo")->nullable();
