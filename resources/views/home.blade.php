@@ -261,6 +261,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="js/sb-admin-2.min.js"></script>
+
+  
 @role("super")
 <script type="text/javascript">
   $('#myTable').DataTable({

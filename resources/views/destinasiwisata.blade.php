@@ -250,6 +250,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="js/sb-admin-2.min.js"></script>
+  
 @role("pariwisata")
 <script type="text/javascript">
   
@@ -419,12 +420,41 @@ var loadFile = function(event) {
           $("#fotodisplay").css('margin', 5 + 'px');
           $('#btn-save').html('Simpan');
           console.log(data);
-      })
+      });
    });
 
   $( ".pariwisata" ).addClass( "active" );
       </script>
 @else
+<script type="text/javascript">
+      $('#myTable').DataTable({
+        processing: true,
+        serverSide: true,
+          ajax: {
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                url: '{!! route('show.destination') !!}',
+                type: 'GET',
+            },
+        columns: [
+             {data: 'photo', name: 'photo', orderable: false,searchable: false,
+              render: function( data, type, full, meta ) {
+                       if(data==null){
+                        data= "{{ URL::to('/gambar/sunbed.png') }}"
+                        return "<center><img src='" + data + "' height='100' width='100'  /></center>"
+                       }
+                     
+                        return "<center><img src='{{ URL::to('/gambar/pariwisata/destinasi') }}/" + data + "' height='100' width='100'  /></center>";
+                    }
+
+           },
+           { data: 'destination_name', name: 'destination_name' },
+           { data: 'kategori', name: 'kategori' },
+           { data: 'address', name: 'address' },
+
+        ]});
+</script>
       
 @endrole
 

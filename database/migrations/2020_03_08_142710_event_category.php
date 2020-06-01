@@ -25,8 +25,8 @@ class EventCategory extends Migration
      *
      * @return void
      */
-    public function down()
+     public function down()
     {
-        //
+          Schema::dropIfExists('event_categories');
     }
 }

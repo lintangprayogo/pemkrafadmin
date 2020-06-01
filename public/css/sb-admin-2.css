@@ -9390,6 +9390,22 @@ a.text-success:hover, a.text-success:focus {
   color: #36b9cc !important;
 }
 
+.text-rose {
+  color: #c44569 !important;
+}
+.text-pink {
+  color: #ef5777 !important;
+}
+
+.text-purple {
+  color: #574b90 !important;
+}
+
+.text-orange {
+  color: #e15f41 !important;
+}
+
+
 a.text-info:hover, a.text-info:focus {
   color: #258391 !important;
 }
@@ -9806,6 +9822,26 @@ a:focus {
   align-items: center;
   justify-content: center;
 }
+
+.border-left-primary {
+  border-left: 0.25rem solid #4e73df !important;
+}
+.border-left-pink {
+  border-left: 0.25rem solid #ef5777 !important;
+}
+
+.border-left-purple {
+  border-left: 0.25rem solid #574b90 !important;
+}
+
+
+.border-left-orange {
+  border-left: 0.25rem solid #e15f41 !important;
+}
+.border-left-rose {
+  border-left: 0.25rem solid #c44569 !important;
+}
+
 
 
 

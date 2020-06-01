@@ -192,15 +192,10 @@
     </div>
     </div>
 
-
-
-      
-    <!-- Bootstrap core JavaScript-->
-
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ URL::to('/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="{{ URL::to('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- Custom scripts for all pages-->
 
@@ -214,7 +209,11 @@
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="{{ URL::to('js/sb-admin-2.min.js') }}"></script>
+
+
+      
+
   <script
    type="text/javascript">
    $('#myTable').DataTable({
@@ -371,7 +370,7 @@
           $('#fotodisplay').width(100).height(100);
           $("#fotodisplay").css('margin', 5 + 'px');
           $('#btn-save').html('Simpan');
-      })
+      });
    });
 var loadFile = function(event) {
     var reader = new FileReader();

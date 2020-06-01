@@ -75,7 +75,9 @@
                       <th width="10%"><center>Sektor</center></th>
                       <th width="10%"><center>Telepon</center></th>
                       <th width="15%"><center>Alamat</center></th>
-                      <th width="15%"><center>Action</center></th>
+                      @role("ekraf")
+                      <th width="10%">Action</th>
+                      @endrole
                     </tr>
                   </thead>
                   <tfoot>
@@ -85,7 +87,9 @@
                       <th width="10%"><center>Sektor</center></th>
                       <th width="10%"><center>Telepon</center></th>
                       <th width="15%"><center>Alamat</center></th>
-                      <th width="15%"><center>Action</center></th>
+                       @role("ekraf")
+                      <th width="10%">Action</th>
+                      @endrole
                     </tr>
                   </tfoot>
              
@@ -327,14 +331,14 @@
 
 
           <div class="form-group">
-                <label for="name" class="col-sm-6 control-label">Karyawan Pria</label>
+                <label for="name" class="col-sm-6 control-label">Kariyawan Pria</label>
                 <div class="col-sm-12">
                     <input type="number" class="form-control" id="male_employe" name="male_employe" placeholder="Masukan Karyawan Pria" value="" maxlength="50">
                 </div>
             </div>
 
                     <div class="form-group">
-                <label for="name" class="col-sm-6 control-label">Karyawan Wanita</label>
+                <label for="name" class="col-sm-6 control-label">Kariyawan Wanita</label>
                 <div class="col-sm-12">
                     <input type="number" class="form-control" id="female_employe" name="female_employe" placeholder="Masukan Karyawan Pria" value="" maxlength="50">
                 </div>
@@ -382,15 +386,17 @@
             </div>
 
 
-             <div class="form-group">
+          <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Modal Luar</label>
                 <div class="col-sm-12">
                     <input type="number" class="form-control" id="external_capital" name="external_capital" placeholder="Masukan Modal Luar" value="" maxlength="50">
                 </div>
             </div>
+
+
   
 
-       <div class="form-group">
+        <div class="form-group">
                 <label for="name" class="col-sm-6 control-label">Sumber Data</label>
                 <div class="col-sm-12">
                     <input type="name" class="form-control" id="data_source" name="data_source" placeholder="Masukan Sumber Data" value="" maxlength="50">
@@ -430,19 +436,11 @@
     </div>
     </div>
 
-   
-
-
-      
-   
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Custom scripts for all pages-->
 
   <script src="//code.jquery.com/jquery.js"></script>
@@ -456,8 +454,10 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="js/sb-admin-2.min.js"></script>
+@role("ekraf")
   <script
-   type="text/javascript">$('#myTable').DataTable({
+   type="text/javascript">
+   $('#myTable').DataTable({
         processing: true,
         serverSide: true,
           ajax: {
@@ -472,9 +472,11 @@
             {data: 'logo', name: 'photo', orderable: false,searchable: false,
               render: function( data, type, full, meta ) {
                        if(data==null){
-                        data= "{{ URL::to('/gambar/store.png') }}"
+                         data= "{{ URL::to('/gambar/store.png') }}"
+                       }else{
+                        data="{{ URL::to('/gambar/umkm') }}/"+data;
                        }
-                         data="{{ URL::to('/gambar/umkm') }}/"+data;
+                       
                         return "<center><img src='" + data + "' height='100' width='100'  /></center>";
                     }
 
@@ -487,11 +489,6 @@
 
         ]});
 
-      </script>
-<script type="text/javascript"></script>
-
-
-<script type="text/javascript">
      $('#create-new-umkm').click(function () {
         $('#umkmForm').trigger("reset");
         $('#fotodisplay').removeProp('src');
@@ -593,7 +590,6 @@
       var id = $(this).data('id');
       $('#umkmForm').trigger("reset");
       $.get('{{ URL::to("/umkm/profile/") }}/'+id, function (data) {
-          console.log(data);
           $('#userCrudModal').html("Edit UMKM");
           $('#btn-save').val("edit-umkm");
           $('#ajax-crud-modal').show();
@@ -617,7 +613,9 @@
           $("#kabupaten").val(data.kabupaten);
           $("#data_year").val(data.data_year);
           if(data.logo==null){
-             data.logo="{{ URL::to('/gambar/store.png') }}"
+             data.logo="{{ URL::to('/gambar/store.png') }}";
+          }else{
+             data.logo="{{ URL::to('/gambar/umkm') }}/"+data.logo;
           }            
           $("#permission_number").val(data.umkm_permission_number);
           $("#permission_name").val(data.umkm_permission_name);
@@ -650,9 +648,45 @@ var loadFile = function(event) {
   }
 
 
+</script>
+  
+@else
+<script type="text/javascript">
+   $('#myTable').DataTable({
+        processing: true,
+        serverSide: true,
+          ajax: {
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                url: '{!! route('show.umkm') !!}',
+                type: 'GET',
+            },
+        columns: [
+           
+            {data: 'logo', name: 'photo', orderable: false,searchable: false,
+              render: function( data, type, full, meta ) {
+                       if(data==null){
+                         data= "{{ URL::to('/gambar/store.png') }}"
+                       }else{
+                        data="{{ URL::to('/gambar/umkm') }}/"+data;
+                       }
+                       
+                        return "<center><img src='" + data + "' height='100' width='100'  /></center>";
+                    }
 
-  $( ".nav-item" ).removeClass( "active" );
+           },
+           { data: 'umkm_name', name: 'umkm_name' },
+           { data: 'business_sector', name: 'business_sector' },
+           { data: 'phone', name: 'phone' },
+           { data: 'address', name: 'address' }
+
+        ]});
+      $( ".nav-item" ).removeClass( "active" );
   $( ".ekraf" ).addClass( "active" );
+</script>
+      
+@endrole
 
 
 

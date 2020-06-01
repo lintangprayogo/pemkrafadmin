@@ -18,19 +18,30 @@ class CultureSiteImport implements ToCollection
         {
           if($count>1){
             try{
+             $photo;
+            if($row[3]=="Situs"){
+                $photo="situs.png";
+            }
+            else if($row[3]=="Bangunan"){
+                $photo="bangunan.png";
+            }
+            else if($row[3]=="Struktur"){
+                $photo="struktur.png";
+            }       
             $site=CultureSite::Create([
-        "register_date"=>$row[0],
-      	"register_number"=>$row[1],
-        "object_name"=>$row[2],
-        "object_category"=>$row[3],
-        "object_address"=>$row[5],
-        "object_exist"=>$row[4],
-        "kelurahan"=>$row[6],
-        "kecamatan"=>$row[7],
-        "kabupaten"=>$row[8],
-        "provinsi"=>$row[9],
-        "cordinate"=>$row[10],
-        "height"=>$row[11]
+            "register_date"=>$row[0],
+          	"register_number"=>$row[1],
+            "object_name"=>$row[2],
+            "object_category"=>$row[3],
+            "object_address"=>$row[5],
+            "object_exist"=>$row[4],
+            "kelurahan"=>$row[6],
+            "kecamatan"=>$row[7],
+            "kabupaten"=>$row[8],
+            "provinsi"=>$row[9],
+            "cordinate"=>$row[10],
+            "height"=>$row[11],
+            "photo"=>$photo
             ]);
 
           

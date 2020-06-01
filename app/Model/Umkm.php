@@ -8,6 +8,6 @@ class Umkm extends Model
 {
     //
     protected $table = 'umkm';
-   protected $guarded = [];
+    protected $guarded = [];
 
 }

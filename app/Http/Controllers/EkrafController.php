@@ -99,8 +99,8 @@ class EkrafController extends Controller
       $business_sector=$request->business_sector;
       $rt=$request->RT;
       $rw=$request->RW;
-      $female_labor=$request->female_labor;
-      $male_labor=$request->male_labor;
+      $female_labour=$request->female_labour;
+      $male_labour=$request->male_labour;
       $female_employe=$request->female_employe;
       $male_employe=$request->male_employe;
       $kecamatan=$request->kecamatan;
@@ -121,7 +121,7 @@ class EkrafController extends Controller
       $umkm->phone=$phone;
       $umkm->RT=$rt;
       $umkm->RW=$rw;
-      $umkm->female_labour=$female_labour;
+      $umkm->female_labour=0;
       $umkm->male_labour=$male_labour;
       $umkm->female_employe=$female_employe;
       $umkm->male_employe=$male_employe;
